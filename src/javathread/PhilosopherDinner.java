@@ -1,4 +1,4 @@
-package Javathread;
+package javathread;
 
 
 import java.util.concurrent.locks.ReentrantLock;
@@ -19,16 +19,17 @@ public class PhilosopherDinner {
         ReentrantLock fork1 = forks[index];
         ReentrantLock fork2 = forks[(index + 1) % forks.length];
         if(!fork1.isLocked()){
-            if(!fork2.isLocked()){
-                fork1.lock();
-                fork2.lock();
-                System.out.println("philosopher " + index + " eat");
-                fork1.unlock();
-                fork2.unlock();
-            }
+            fork1.lock();
         }
-        fork1.unlock();
-        fork2.unlock();
+        if(!fork2.isLocked()){
+            fork2.lock();
+        }
+        if(fork1.isHeldByCurrentThread()&&fork2.isHeldByCurrentThread()){
+
+            fork2.unlock();
+            fork1.unlock();
+            System.out.println("philosopher " + index + " eat");
+        }
     }
 
     public static void main(String[] args) {
@@ -47,5 +48,4 @@ public class PhilosopherDinner {
             }).start();
         }
     }
-
 }

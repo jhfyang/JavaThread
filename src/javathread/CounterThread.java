@@ -37,9 +37,10 @@ public class CounterThread implements Runnable {
     }
     public static void main(String[] args) {
         CounterThread test = new CounterThread();
-        while(test.th1.getState()!=Thread.State.TERMINATED&&test.th2.getState()!=Thread.State.TERMINATED&&test.th3.getState()!=Thread.State.TERMINATED&&test.th4.getState()!=Thread.State.TERMINATED){
-    
+        while(test.th1.getState()!=Thread.State.TERMINATED||test.th2.getState()!=Thread.State.TERMINATED||test.th3.getState()!=Thread.State.TERMINATED||test.th4.getState()!=Thread.State.TERMINATED){
+
         }
+        System.out.println(test.list);
         System.out.println("Programm finished");
                
     }
